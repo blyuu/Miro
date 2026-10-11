@@ -1,0 +1,107 @@
+[
+  {
+    "id": "thread-new",
+    "pattern": "new\\s+(System\\.Threading\\.)?Thread\\s*\\(",
+    "severity": "error",
+    "category": "threading",
+    "reason": "WebGL is single-threaded by default (no System.Threading.Thread). Requires the WebGL Threads/pthreads build option (SharedArrayBuffer + COOP/COEP headers) or must be refactored to use coroutines/async instead."
+  },
+  {
+    "id": "thread-pool-queue",
+    "pattern": "ThreadPool\\.QueueUserWorkItem",
+    "severity": "error",
+    "category": "threading",
+    "reason": "Background thread pool work is not available on standard WebGL builds."
+  },
+  {
+    "id": "mutex-semaphore",
+    "pattern": "\\bnew\\s+(Mutex|Semaphore|SemaphoreSlim)\\s*\\(",
+    "severity": "warning",
+    "category": "threading",
+    "reason": "Cross-thread synchronization primitives are meaningless without real threads on WebGL; usually a sign the code assumes a multi-threaded environment."
+  },
+  {
+    "id": "task-blocking-wait",
+    "pattern": "\\.(Wait\\(\\)|Result)\\b",
+    "severity": "warning",
+    "category": "async-deadlock",
+    "reason": "Blocking on Task.Wait()/.Result can deadlock in WebGL's single-threaded synchronization-context model since there is no background thread to complete the task. Prefer await/coroutines."
+  },
+  {
+    "id": "process-start",
+    "pattern": "System\\.Diagnostics\\.Process\\.Start|Process\\.Start\\s*\\(",
+    "severity": "error",
+    "category": "os-process",
+    "reason": "Launching external OS processes is impossible in a browser sandbox."
+  },
+  {
+    "id": "reflection-emit",
+    "pattern": "System\\.Reflection\\.Emit",
+    "severity": "error",
+    "category": "il2cpp-aot",
+    "reason": "WebGL uses IL2CPP ahead-of-time compilation only; System.Reflection.Emit (runtime code generation) is not supported."
+  },
+  {
+    "id": "raw-sockets",
+    "pattern": "System\\.Net\\.Sockets\\.(Tcp|Udp)Client|new\\s+Socket\\s*\\(",
+    "severity": "error",
+    "category": "networking",
+    "reason": "Raw TCP/UDP sockets are not available in browsers. Use UnityWebRequest (HTTP) or a WebSocket client instead."
+  },
+  {
+    "id": "filestream-arbitrary-path",
+    "pattern": "new\\s+FileStream\\s*\\(|File\\.(ReadAllBytes|ReadAllText|WriteAllBytes|WriteAllText|Open|Create)\\s*\\(",
+    "severity": "warning",
+    "category": "filesystem",
+    "reason": "WebGL only has a virtual IndexedDB-backed filesystem (persistentDataPath) - arbitrary OS file paths will fail. Verify this call targets Application.persistentDataPath or StreamingAssets (via UnityWebRequest, not File.*)."
+  },
+  {
+    "id": "directory-enumerate",
+    "pattern": "Directory\\.(GetFiles|GetDirectories|EnumerateFiles|EnumerateDirectories)\\s*\\(",
+    "severity": "warning",
+    "category": "filesystem",
+    "reason": "Directory enumeration outside the virtual IDBFS persistentDataPath is unsupported on WebGL."
+  },
+  {
+    "id": "dllimport",
+    "pattern": "\\[DllImport\\s*\\(",
+    "severity": "warning",
+    "category": "native-interop",
+    "reason": "A P/Invoke native import was found. On WebGL this only works if there is a matching .jslib JavaScript plugin providing the same function names - verify one exists, otherwise this call will fail at runtime (not compile time)."
+  },
+  {
+    "id": "webcamtexture",
+    "pattern": "\\bWebCamTexture\\b",
+    "severity": "info",
+    "category": "device-io",
+    "reason": "WebCamTexture has limited/inconsistent WebGL browser support (varies by browser, requires HTTPS and a user gesture). Verify manually."
+  },
+  {
+    "id": "microphone",
+    "pattern": "\\bMicrophone\\.(Start|Device)\\b",
+    "severity": "info",
+    "category": "device-io",
+    "reason": "Microphone capture on WebGL requires HTTPS + user gesture and has partial browser support. Verify manually."
+  },
+  {
+    "id": "application-quit",
+    "pattern": "Application\\.Quit\\s*\\(",
+    "severity": "info",
+    "category": "lifecycle",
+    "reason": "Application.Quit() is a no-op on WebGL (a browser tab can't be closed by the page). Make sure calling code doesn't assume the process actually exits."
+  },
+  {
+    "id": "systemconsole",
+    "pattern": "System\\.Console\\.(Read|ReadLine|ReadKey)",
+    "severity": "error",
+    "category": "console-io",
+    "reason": "There is no console stdin in a browser; blocking console reads will hang."
+  },
+  {
+    "id": "environment-exit",
+    "pattern": "Environment\\.Exit\\s*\\(",
+    "severity": "warning",
+    "category": "lifecycle",
+    "reason": "Environment.Exit behaves like Application.Quit on WebGL - it will not actually terminate the browser tab/process."
+  }
+]

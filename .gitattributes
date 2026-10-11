@@ -1,0 +1,7 @@
+# Code-only repo: just keep line endings/diffs sane for source files.
+* text=auto eol=lf
+*.cs text diff=csharp
+*.jslib text
+*.shader text
+*.hlsl text
+*.cginc text

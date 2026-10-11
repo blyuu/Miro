@@ -1,0 +1,22 @@
+{
+  "alwaysNativeExtensions": [
+    { "ext": ".so", "platform": "Linux/Android native", "severity": "error" },
+    { "ext": ".dylib", "platform": "macOS/iOS native", "severity": "error" },
+    { "ext": ".bundle", "platform": "macOS native", "severity": "error" },
+    { "ext": ".a", "platform": "static native library", "severity": "warning" },
+    { "ext": ".framework", "platform": "iOS/macOS native framework", "severity": "error" }
+  ],
+  "managedButVerifyExtensions": [
+    { "ext": ".dll", "note": "Could be a managed C# assembly (fine) or a native Win32 DLL (broken on WebGL). Disambiguated per-file via the companion .meta's isNativePlugin flag." }
+  ],
+  "webglBridgeExtensions": [
+    { "ext": ".jslib", "note": "Correct mechanism for native JS interop on WebGL - presence is informational/positive, not a problem." }
+  ],
+  "knownProblematicPackages": [
+    { "id": "com.unity.netcode.gameobjects", "note": "Needs a WebSocket-based transport (not raw UDP/UTP) for WebGL; verify transport configuration." },
+    { "id": "com.unity.xr.", "note": "XR packages generally have no WebGL support.", "matchType": "prefix" },
+    { "id": "com.unity.multiplayer-hlapi", "note": "Legacy UNet networking does not support WebGL." },
+    { "id": "com.unity.ai.navigation", "note": "NavMesh runtime baking (not static baked data) can be heavy on WebGL; usually fine if baked ahead of time." },
+    { "id": "com.unity.inputsystem", "note": "Supported on WebGL since recent versions, but verify gamepad/touch bindings are tested in-browser - several browser input quirks exist." }
+  ]
+}

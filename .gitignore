@@ -1,0 +1,65 @@
+# ---- Code-only repository ----
+# This repo is a code reference/portfolio link, not a runnable Unity project.
+# Everything under Assets/ is excluded by default...
+/Assets/*
+# ...except the folders that hold actual source code.
+!/Assets/Scripts/
+!/Assets/Scripts/**
+!/Assets/Plugins/
+!/Assets/Plugins/**
+!/Assets/Shaders/
+!/Assets/Shaders/**
+
+# Unity project scaffolding not needed for a code-only repo
+/ProjectSettings/
+/Packages/
+/UserSettings/
+/Library/
+/Temp/
+/Obj/
+/Build/
+/Builds/
+/Logs/
+/MemoryCaptures/
+/Recordings/
+/Data/
+
+# Large local demo footage; shared via Google Drive, not committed
+/*.mp4
+
+# Portfolio deck/analysis materials kept out of the public repo
+/Portfolio/
+
+# WebGL build-pipeline tool: keep source, drop generated reports/logs
+/Tools/webgl-porting-pipeline/reports/
+
+# AI coding agent config/memory, not meant to be shared in the portfolio repo
+/.claude/
+/.kimi-code/
+/.revvy/
+/AGENTS.md
+/CLAUDE.md
+/.mcp.json
+
+# ---- IDE / editor / Unity-generated cruft (in case the project is opened locally) ----
+.vs/
+.idea/
+.gradle/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.swp
+*.swo
+.DS_Store
+Thumbs.db

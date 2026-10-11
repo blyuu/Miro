@@ -1,0 +1,17 @@
+{
+  "name": "unity-webgl-porting-pipeline",
+  "version": "0.1.0",
+  "description": "Reusable Unity -> WebGL/H5 porting verification pipeline. Project-agnostic: every command takes --project-path.",
+  "private": true,
+  "type": "commonjs",
+  "bin": {
+    "webgl-porting": "src/cli.js"
+  },
+  "scripts": {
+    "analyze": "node src/cli.js analyze"
+  },
+  "dependencies": {},
+  "optionalDependencies": {
+    "playwright": "^1.47.0"
+  }
+}
