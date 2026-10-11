@@ -162,13 +162,5 @@ ProjectMiro/
 ---
 
 ## Credits & Copyright
-
-이 프로젝트는 **학습 및 포트폴리오 목적의 비상업적 프로젝트**입니다.
-
-- 환경 아트 에셋 **PixelDrift Metro Free**(`Assets/EmaceArt/PixelDrift Metro Free`)는 원작자(EmaceArt)의 애셋스토어 라이선스에 따라 사용되었습니다.
-- **CrazyGames**와 CrazyGames SDK는 CrazyGames B.V.의 상표이며, 본 프로젝트는 CrazyGames와 제휴·후원 관계가 없습니다.
-- 본 저장소의 **게임 코드(`Assets/Scripts/`)는 작성자 본인(김준수)이 작성**했습니다.
-
-<div align="center">
-<sub>© 2026 김준수 (blyuu) · 코드/문서에 한함</sub>
+>
 </div>
